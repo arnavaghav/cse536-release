@@ -1,16 +1,17 @@
 #!/bin/bash -e
 
-if [ "$#" != 1 ]; then
-    echo "Usage: ./run <kernel-version/gdb>"
-    echo "      e.g., ./run kernel1"
-    exit 0
-fi
+# if [ "$#" != 1 ]; then
+#     echo "Usage: ./run <kernel-version/gdb>"
+#     echo "      e.g., ./run kernel1"
+#     exit 0
+# fi
 
 kernel=$1
 
 if [ "$1" == "gdb" ]; then
-    kernel=kernel1
-    upper=`echo kernel1 | tr '[:lower:]' '[:upper:]'`
+    kernel=kernelpmp1
+    upper=`echo kernelpmp1 | tr '[:lower:]' '[:upper:]'`
+    echo "Value of upper: $upper"
 fi
 
 if [ "$1" == "kernel1tamper" ]; then
@@ -32,7 +33,7 @@ make clean
 make all KERNELVERSION=$upper
 ./create-recovery $kernel
 
-if [ "$1" == "gdb" ]; then
+if [ "$2" == "gdb" ]; then
     echo ""
     echo "Executing $kernel with GDB.. "
     make qemu-gdb

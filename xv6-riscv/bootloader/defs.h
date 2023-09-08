@@ -52,3 +52,4 @@ extern uint64 end;      // end of binary
 /* Location of the QEMU ramdisk. */
 #define RAMDISK         0x84000000
 #define RECOVERYDISK    0x84500000
+#define SYSINFOADDR (struct sys_info*)0x80080000

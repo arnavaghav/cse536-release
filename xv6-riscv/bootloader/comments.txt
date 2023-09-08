@@ -1,0 +1,40 @@
+    // Version 1
+    // struct elfhdr* kernel_elfhdr = (struct elfhdr*) RAMDISK;
+
+    // // Step 2: Grab the offset and size of the program headers from the ELF header
+    // uint64 phoff = kernel_elfhdr->phoff;
+    // uint64 phsize = kernel_elfhdr->phentsize;
+    // uint16 phnum = kernel_elfhdr->phnum;
+
+    // // Step 3: Find the highest and lowest addresses used in the binary
+    // uint64 highest_addr = 0;
+    // uint64 lowest_addr = (uint64) -1;
+    // for(uint16 i = 0; i < phnum; i++) {
+    //     struct proghdr* phdr = (struct proghdr*) (RAMDISK + phoff + i * phsize);
+    //     uint64 section_start = phdr->vaddr;
+    //     uint64 section_end = section_start + phdr->memsz;
+    //     if(section_start < lowest_addr) {
+    //         lowest_addr = section_start;
+    //     }
+    //     if(section_end > highest_addr) {
+    //         highest_addr = section_end;
+    //     }
+    // }
+
+    // uint64 kernel_size = highest_addr - lowest_addr;
+    // return kernel_size;
+
+
+
+
+
+
+
+
+    la sp, bl_stack
+    li a0, 1024*4
+    csrr a1, mhartid
+    addi a1, a1, 1
+    mul a0, a0, a1
+    add sp, sp, a0
+    j start        
